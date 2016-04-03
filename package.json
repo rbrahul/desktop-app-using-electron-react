@@ -1,0 +1,19 @@
+{
+  "name": "apptest",
+  "version": "1.0.0",
+  "description": "first software built with electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "electron",
+    "first",
+    "app"
+  ],
+  "author": "rbrahul",
+  "license": "MIT",
+  "devDependencies":{
+    "electron-prebuilt":"^0.36.0"
+  }
+}
