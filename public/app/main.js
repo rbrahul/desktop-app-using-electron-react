@@ -12,7 +12,7 @@ class App extends Component{
 		this.state = {
 				tasks: TaskStore.getState()
 					}
-					console.log(TaskStore.getState());
+				
 		}
 componentDidMount() {
 this.storeSubscription = TaskStore.addListener( 
