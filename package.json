@@ -1,7 +1,7 @@
 {
-  "name": "apptest",
+  "name": "taskmanager",
   "version": "1.0.0",
-  "description": "first software built with electron",
+  "description": "Task Manager software built with electron",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
@@ -13,7 +13,18 @@
   ],
   "author": "rbrahul",
   "license": "MIT",
+  "dependencies": {
+    "fbemitter": "^2.0.2",
+    "flux": "^2.1.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.0",
+    "react-redux": "^4.4.0",
+    "redux": "^3.3.1"
+  },
   "devDependencies":{
-    "electron-prebuilt":"^0.36.0"
+    "electron-prebuilt":"^0.36.0",
+     "babel-core": "5.8.*",
+    "babel-loader": "5.3.*",
+    "webpack": "1.12.*"
   }
 }
