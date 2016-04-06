@@ -10,8 +10,13 @@ let TaskStore = {
  
 getState() {
 	if(tasks.length==0){
-	tasks=JSON.parse(localStorage.getItem("tasks"));
+		let taskList=JSON.parse(localStorage.getItem("tasks"));
+		if(taskList!==null){
+			tasks=taskList;
+		}
+
 	}
+
 	return tasks;
 },
  
@@ -34,6 +39,13 @@ case taskConstants.DELETE_TASK:
 tasks.splice(action.id,1);
 localStorage.setItem("tasks",JSON.stringify(tasks));
 __emitter.emit(CHANGE_EVENT);
+break;
+
+case taskConstants.CHANGE_STATUS:
+console.log(tasks[action.id]);
+	tasks[action.id]['status']=(action.status=='Done')?'Pending':'Done';
+	localStorage.setItem("tasks",JSON.stringify(tasks));
+	__emitter.emit(CHANGE_EVENT);
 break;
 
 }

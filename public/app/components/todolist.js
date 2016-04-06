@@ -20,10 +20,23 @@ export default class TodoLists extends Component{
     
         }
     }
+    changeStatus(id,status,e){
+     console.log(id)
+      e.preventDefault();
+      TaskActions.changeStatus(id,status);
+      //alert("fired");
+    }
 	render(){
-				const taskItems=this.state.tasks.map((task,i)=>{
+   var taskr=this.state.tasks||[];
+				const taskItems=taskr.map((task,i)=>{
+          let setDone={
+            'display':(task.status=='Done')?'inline-block':'none'
+        };
+             let setPending={
+            'display':(task.status=='Done')?'none':'inline-block'
+        };
 				
-					var id=i;
+					let id=i;
 			return (   <tr key={i}>
                   <td>{i+1}</td>
                   <td>{task.description}</td>
@@ -31,9 +44,9 @@ export default class TodoLists extends Component{
                   <td>{task.priority}</td>
                   <td>{task.status}</td>
                   <td>  
-	                  <a className="grey darken-4" title="Done"><i className="material-icons left">done</i></a> 
-	                   <a className="" title="Undo"><i className="material-icons left">settings_backup_restore</i></a>
-	                   <a className="grey darken-4" title="Delete" onClick={this.deleteTask.bind(this)} ><i className="material-icons left" data-task-id={id}>delete</i></a>
+	                  <a className="pointer"  title="Done" style={setPending}   onClick={this.changeStatus.bind(this,id,'Pending')}><i className="material-icons left">done</i></a> 
+	                   <a className="pointer" title="Undo"  style={setDone}  onClick={this.changeStatus.bind(this,id,'Done')} ><i className="material-icons left">settings_backup_restore</i></a>
+	                   <a className="pointer" title="Delete" onClick={this.deleteTask.bind(this)} ><i className="material-icons left" data-task-id={id}>delete</i></a>
                    </td>
                 </tr>);
 		});

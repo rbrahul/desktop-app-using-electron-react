@@ -17,6 +17,14 @@ deleteTask(taskId){
 	id: taskId
 });
 	console.log("deleted a task");
+},
+changeStatus(taskId,type){
+	AppDispatcher.dispatch({
+	type: TaskConstants.CHANGE_STATUS,
+	id: taskId,
+	status:type
+});
+	console.log("changed status");
 }
 
  
