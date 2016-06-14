@@ -4,7 +4,8 @@
   "description": "Task Manager software built with electron",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --platform=linux --arch=x64 --ignore=node_modules"
   },
   "keywords": [
     "electron",
@@ -21,10 +22,11 @@
     "react-redux": "^4.4.0",
     "redux": "^3.3.1"
   },
-  "devDependencies":{
-    "electron-prebuilt":"^0.36.0",
-     "babel-core": "5.8.*",
+  "devDependencies": {
+    "babel-core": "5.8.*",
     "babel-loader": "5.3.*",
+    "electron-packager": "^7.0.3",
+    "electron-prebuilt": "^0.36.0",
     "webpack": "1.12.*"
   }
 }

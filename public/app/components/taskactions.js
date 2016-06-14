@@ -8,7 +8,6 @@ createTask(task){
 	type: TaskConstants.CREATE_TASK,
 	task: task
 });
-	console.log("task created");
 },
 
 deleteTask(taskId){
@@ -16,7 +15,6 @@ deleteTask(taskId){
 	type: TaskConstants.DELETE_TASK,
 	id: taskId
 });
-	console.log("deleted a task");
 },
 changeStatus(taskId,type){
 	AppDispatcher.dispatch({
@@ -24,7 +22,6 @@ changeStatus(taskId,type){
 	id: taskId,
 	status:type
 });
-	console.log("changed status");
 }
 
  

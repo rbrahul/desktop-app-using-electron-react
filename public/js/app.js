@@ -19746,7 +19746,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	  value: true
+		value: true
 	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -19767,36 +19767,45 @@
 
 	var TaskStore = {
 
-	  getState: function getState() {
-	    if (tasks.length == 0) {
-	      tasks = JSON.parse(localStorage.getItem("tasks"));
-	    }
-	    console.log(tasks);
-	    return tasks;
-	  },
+		getState: function getState() {
+			if (tasks.length == 0) {
+				var taskList = JSON.parse(localStorage.getItem("tasks"));
+				if (taskList !== null) {
+					tasks = taskList;
+				}
+			}
 
-	  addListener: function addListener(callback) {
-	    return __emitter.addListener(CHANGE_EVENT, callback);
-	  }
+			return tasks;
+		},
+
+		addListener: function addListener(callback) {
+			return __emitter.addListener(CHANGE_EVENT, callback);
+		}
 
 	};
 
 	TaskStore.dispatchToken = _dispatcher2['default'].register(function (action) {
-	  switch (action.type) {
-	    case _constants2['default'].CREATE_TASK:
-	      tasks.push(action.task);
-	      localStorage.setItem("tasks", JSON.stringify(tasks));
+		switch (action.type) {
+			case _constants2['default'].CREATE_TASK:
+				tasks.push(action.task);
+				localStorage.setItem("tasks", JSON.stringify(tasks));
 
-	      __emitter.emit(CHANGE_EVENT);
-	      break;
+				__emitter.emit(CHANGE_EVENT);
+				break;
 
-	    case _constants2['default'].DELETE_TASK:
-	      tasks.splice(action.id, 1);
-	      localStorage.setItem("tasks", JSON.stringify(tasks));
-	      __emitter.emit(CHANGE_EVENT);
-	      break;
+			case _constants2['default'].DELETE_TASK:
+				tasks.splice(action.id, 1);
+				localStorage.setItem("tasks", JSON.stringify(tasks));
+				__emitter.emit(CHANGE_EVENT);
+				break;
 
-	  }
+			case _constants2['default'].CHANGE_STATUS:
+				tasks[action.id]['status'] = action.status == 'Done' ? 'Pending' : 'Done';
+				localStorage.setItem("tasks", JSON.stringify(tasks));
+				__emitter.emit(CHANGE_EVENT);
+				break;
+
+		}
 	});
 
 	exports['default'] = TaskStore;
@@ -20697,7 +20706,8 @@
 	exports['default'] = {
 	  CREATE_TASK: 'create a task',
 	  FETCH_TASK: 'fetch all tasks',
-	  DELETE_TASK: 'delete a task'
+	  DELETE_TASK: 'delete a task',
+	  CHANGE_STATUS: 'status changed'
 	};
 	module.exports = exports['default'];
 
@@ -20728,7 +20738,6 @@
 				type: _constants2['default'].CREATE_TASK,
 				task: task
 			});
-			console.log("task created");
 		},
 
 		deleteTask: function deleteTask(taskId) {
@@ -20736,7 +20745,13 @@
 				type: _constants2['default'].DELETE_TASK,
 				id: taskId
 			});
-			console.log("deleted a task");
+		},
+		changeStatus: function changeStatus(taskId, type) {
+			_dispatcher2['default'].dispatch({
+				type: _constants2['default'].CHANGE_STATUS,
+				id: taskId,
+				status: type
+			});
 		}
 
 	};
@@ -20922,7 +20937,6 @@
 	    this.state = {
 	      tasks: this.props.tasks
 	    };
-	    console.log(this.props.tasks);
 	  }
 
 	  _createClass(TodoLists, [{
@@ -20938,11 +20952,25 @@
 	      }
 	    }
 	  }, {
+	    key: 'changeStatus',
+	    value: function changeStatus(id, status, e) {
+	      e.preventDefault();
+	      _taskactions2['default'].changeStatus(id, status);
+	      //alert("fired");
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this = this;
 
-	      var taskItems = this.state.tasks.map(function (task, i) {
+	      var taskr = this.state.tasks || [];
+	      var taskItems = taskr.map(function (task, i) {
+	        var setDone = {
+	          'display': task.status == 'Done' ? 'inline-block' : 'none'
+	        };
+	        var setPending = {
+	          'display': task.status == 'Done' ? 'none' : 'inline-block'
+	        };
 
 	        var id = i;
 	        return _react2['default'].createElement(
@@ -20978,7 +21006,7 @@
 	            null,
 	            _react2['default'].createElement(
 	              'a',
-	              { className: 'grey darken-4', title: 'Done' },
+	              { className: 'pointer', title: 'Done', style: setPending, onClick: _this.changeStatus.bind(_this, id, 'Pending') },
 	              _react2['default'].createElement(
 	                'i',
 	                { className: 'material-icons left' },
@@ -20987,7 +21015,7 @@
 	            ),
 	            _react2['default'].createElement(
 	              'a',
-	              { className: '', title: 'Undo' },
+	              { className: 'pointer', title: 'Undo', style: setDone, onClick: _this.changeStatus.bind(_this, id, 'Done') },
 	              _react2['default'].createElement(
 	                'i',
 	                { className: 'material-icons left' },
@@ -20996,7 +21024,7 @@
 	            ),
 	            _react2['default'].createElement(
 	              'a',
-	              { className: 'grey darken-4', title: 'Delete', onClick: _this.deleteTask.bind(_this) },
+	              { className: 'pointer', title: 'Delete', onClick: _this.deleteTask.bind(_this) },
 	              _react2['default'].createElement(
 	                'i',
 	                { className: 'material-icons left', 'data-task-id': id },

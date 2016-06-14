@@ -42,7 +42,6 @@ __emitter.emit(CHANGE_EVENT);
 break;
 
 case taskConstants.CHANGE_STATUS:
-console.log(tasks[action.id]);
 	tasks[action.id]['status']=(action.status=='Done')?'Pending':'Done';
 	localStorage.setItem("tasks",JSON.stringify(tasks));
 	__emitter.emit(CHANGE_EVENT);

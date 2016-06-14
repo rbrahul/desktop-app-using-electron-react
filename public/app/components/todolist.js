@@ -7,7 +7,6 @@ export default class TodoLists extends Component{
 	this.state={
             tasks:this.props.tasks
         }
-        console.log(this.props.tasks);
 	}
     deleteTask(e){
         e.preventDefault();
@@ -21,7 +20,6 @@ export default class TodoLists extends Component{
         }
     }
     changeStatus(id,status,e){
-     console.log(id)
       e.preventDefault();
       TaskActions.changeStatus(id,status);
       //alert("fired");
