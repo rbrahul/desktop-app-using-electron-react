@@ -3,8 +3,8 @@ An user friendly Task Managing  Desktop Application Built With Electron and Reac
 
 ## Application Screen:
 
-Inline-style: 
-![Task Manager](https://github.com/rbrahul/https://github.com/rbrahul/desktop-app-using-electron-react/master/task-manager-using-electron-react.png"Task Manager built with Electron and ReactJS")
+
+![Task Manager](https://raw.githubusercontent.com/rbrahul/desktop-app-using-electron-react/master/task-manager-using-electron-react.png "Task Manager built with Electron and ReactJS")
 
 
 ## How To Run?
