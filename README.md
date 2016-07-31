@@ -1,6 +1,12 @@
 # desktop-app-using-electron-react
 An user friendly Task Managing  Desktop Application Built With Electron and Reactjs  
 
+## Application Screen:
+
+Inline-style: 
+![Task Manager](https://github.com/rbrahul/https://github.com/rbrahul/desktop-app-using-electron-react/master/task-manager-using-electron-react.png"Task Manager built with Electron and ReactJS")
+
+
 ## How To Run?
 Go to your command line and enter the directory and simply run following command:
 ```
