@@ -6,14 +6,17 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . --platform=linux --arch=x64 --ignore=node_modules --out dist/",
-     "deb64": "electron-installer-debian --src dist/taskmanager-linux-x64/ --dest dist/installers/ --arch amd64"
+     "deb64": "electron-installer-debian --src dist/taskmanager-linux-x64/ --dest dist/installers/ --arch amd64 --config config.json"
   },
   "keywords": [
     "electron",
     "first",
     "app"
   ],
-  "author": "rbrahul",
+  "author": {
+      "name":"Rahul Baruri Ripan",
+      "url":"https://github.com/rbrahul"
+  },
   "license": "MIT",
   "dependencies": {
     "fbemitter": "^2.0.2",

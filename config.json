@@ -1,0 +1,12 @@
+{
+  "dest": "dist/installers/",
+  "icon": "public/images/icon128-2x.png",
+  "categories": [
+    "Utility"
+  ],
+  "options": {
+    "genericName": "Todo Manager",
+    "description": "An awesome Todo Manager",
+    "productDescription": "This application helps you to keep track of your day to day task. It has many feature such filter by date, status"
+  }
+}
